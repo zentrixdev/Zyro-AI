@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+  <!-- Essential Meta Tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- SEO -->
+  <title>Zyro AI – Your Smart Chat Assistant</title>
+  <meta name="description" content="Chat with Zyro AI – a fast, smart, and helpful chatbot powered by Zentrix." />
+  <meta name="keywords" content="Zyro AI, chatbot, AI assistant, Zentrix, smart assistant" />
+  <meta name="author" content="Hz" />
+
+  <!-- Open Graph / Social Preview -->
+  <meta property="og:title" content="Zyro AI – Your Smart Chat Assistant" />
+  <meta property="og:description" content="Experience fast, smart AI chats with Zyro – powered by OpenRouter and Zentrix." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourdomain.com" />
+  <meta property="og:image" content="#" />
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Zyro AI – Your Smart Chat Assistant" />
+  <meta name="twitter:description" content="Chat with Zyro AI for helpful, fast, and smart answers. Powered by Zentrix." />
+  <meta name="twitter:image" content="https://yourdomain.com/zyro-preview.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+  <!-- Tailwind & Font Awesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Custom Styles -->
+  <style>
+    .glass {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(200, 200, 200, 0.5);
+    }
+    .prompt-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      background: white;
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      animation: fadeInUp 0.5s ease;
+    }
+    .prompt-card:hover {
+      background-color: #f0f9ff;
+      border-color: #3b82f6;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    .hamburger .bar {
+      width: 24px;
+      height: 2px;
+      background: #333;
+      margin: 5px 0;
+      transition: 0.4s;
+    }
+    .hamburger.open .bar:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.open .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.open .bar:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .typing::after {
+      content: '|';
+      animation: blink 1s step-start infinite;
+      margin-left: 5px;
+    }
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-white to-slate-100 text-gray-900 flex flex-col h-[100dvh] overflow-hidden">
+
+
+  
+  <!-- Sidebar -->
+<aside id="sidebar" class="fixed inset-y-0 left-0 z-30 w-64 bg-white shadow-xl transform -translate-x-full transition-transform duration-300 ease-in-out sm:hidden rounded-r-lg">
+  <div class="p-4 flex justify-between items-center border-b">
+    <h2 class="text-lg font-semibold">Menu</h2>
+    <button id="close-sidebar" class="text-gray-600 hover:text-gray-900">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="flex flex-col justify-between h-[calc(100%-64px)]"> <!-- 64px accounts for the top bar -->
+    <!-- Main content -->
+    <nav class="p-4 space-y-3">
+  <!-- New Chat Button -->
+  <button id="new-chat-sidebar"
+    class="w-full flex items-center justify-center gap-3 bg-blue-600 text-white px-5 py-3 rounded-2xl shadow-lg hover:bg-blue-700 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+    </svg>
+    <span class="text-sm font-medium">New Chat</span>
+  </button>
+
+  <!-- Download Chat Button -->
+  <button id="download-chat-sidebar"
+    class="w-full flex items-center justify-center gap-3 bg-gray-100 text-gray-800 px-5 py-3 rounded-2xl shadow-md hover:bg-gray-200 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4" />
+    </svg>
+    <span class="text-sm font-medium">Download Chat</span>
+  </button>
+</nav>
+
+
+    <!-- Footer -->
+    <div class="text-xs text-gray-500 text-center p-4">
+      Powered by 
+      <a href="#" class="text-blue-600 hover:underline" target="_blank">Zentrix</a>
+    </div>
+  </div>
+</aside>
+
+
+  <!-- Header -->
+  <header class="glass p-4 rounded-xl shadow mb-2 sm:mb-4 relative flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <button id="hamburger" class="hamburger sm:hidden focus:outline-none">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </button>
+      <button id="new-chat"
+  class="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-gray-800 bg-gradient-to-r from-gray-200 to-gray-300 px-4 py-2 rounded-xl shadow hover:from-gray-300 hover:to-gray-400 hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
+  <i class="fas fa-plus text-gray-700"></i>
+  <span>New Chat</span>
+</button>
+
+    </div>
+    <!-- Centered Title -->
+    <div class="absolute left-1/2 transform -translate-x-1/2 text-center text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 text-transparent bg-clip-text drop-shadow-sm select-none tracking-tight">
+  Zyro AI
+</div>
+
+
+    <div class="flex gap-2 items-center justify-end">
+      <button id="download-chat"
+  class="hidden sm:inline-flex items-center justify-center gap-2 text-sm font-semibold px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow hover:from-blue-700 hover:to-indigo-700 hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+  title="Download Chat">
+  <i class="fas fa-download"></i>
+  <span class="hidden md:inline">Download</span>
+</button>
+
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="flex-1 flex flex-col overflow-hidden">
+
+    <!-- Prompts -->
+   <section id="example-prompts" class="p-6 sm:p-8 animate-fadeIn">
+  <p class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6 tracking-tight">
+    💡 What can I help you with?
+  </p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 text-base text-gray-700">
+    <div class="prompt-card hover:shadow-lg hover:ring-2 hover:ring-blue-500/30 transition-all duration-200">
+      <i class="fas fa-cloud-sun text-blue-500 text-xl"></i>
+      <span class="font-medium">What's the weather like today?</span>
+    </div>
+    <div class="prompt-card hover:shadow-lg hover:ring-2 hover:ring-pink-400/30 transition-all duration-200">
+      <i class="fas fa-feather-alt text-pink-500 text-xl"></i>
+      <span class="font-medium">Write a short poem about spring.</span>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Chatbox -->
+    <section id="chatbox" class="flex-1 overflow-y-auto p-4 space-y-3 animate-fadeIn"></section>
+
+    <!-- Send Box -->
+<form id="chat-form" onsubmit="handleSubmit(event)" class="glass sticky bottom-0 left-0 right-0 z-10 p-4 bg-white/60 backdrop-blur-md shadow-inner border-t border-gray-200 flex items-center gap-3">
+  <input
+    id="user-input"
+    type="text"
+    placeholder="Type a message..."
+    class="flex-1 px-4 py-3 rounded-xl border border-gray-300 text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+  />
+  <button type="submit"
+  class="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-5 py-3 rounded-2xl shadow-lg hover:from-blue-700 hover:to-indigo-700 hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+  
+  <svg class="w-5 h-5 sm:hidden animate-pulse" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M22 2L11 13"></path>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M22 2L15 22l-4-9-9-4 20-7z"></path>
+  </svg>
+
+  <span class="hidden sm:inline text-sm font-semibold tracking-wide">Send</span>
+</button>
+
+</form>
+
+  </div>
+
+  <!-- Footer (Hidden on mobile) -->
+  <footer class="text-center text-sm text-gray-600 py-2 sm:py-3 hidden sm:block">
+    Powered by <a href="#" class="text-blue-600 hover:underline" target="_blank" rel="noopener">Zentrix</a>
+  </footer>
+
+  <!-- Script -->
+ <script>const _0x58a5be=_0x23ac;(function(_0xa91842,_0x5e1b91){const _0xae54fb=_0x23ac,_0x118831=_0xa91842();while(!![]){try{const _0x50d221=-parseInt(_0xae54fb(0x1fd))/0x1*(parseInt(_0xae54fb(0x1c6))/0x2)+parseInt(_0xae54fb(0x1ca))/0x3*(-parseInt(_0xae54fb(0x1fb))/0x4)+parseInt(_0xae54fb(0x1f6))/0x5*(parseInt(_0xae54fb(0x208))/0x6)+parseInt(_0xae54fb(0x1c2))/0x7*(parseInt(_0xae54fb(0x1c4))/0x8)+-parseInt(_0xae54fb(0x1be))/0x9*(-parseInt(_0xae54fb(0x200))/0xa)+-parseInt(_0xae54fb(0x205))/0xb+parseInt(_0xae54fb(0x1c3))/0xc;if(_0x50d221===_0x5e1b91)break;else _0x118831['push'](_0x118831['shift']());}catch(_0x44263e){_0x118831['push'](_0x118831['shift']());}}}(_0x4de9,0x2522f));const sidebar=document[_0x58a5be(0x1bf)](_0x58a5be(0x1e2)),hamburger=document[_0x58a5be(0x1bf)]('hamburger'),closeSidebar=document['getElementById'](_0x58a5be(0x1d7)),chatBox=document[_0x58a5be(0x1bf)](_0x58a5be(0x1c0)),userInput=document[_0x58a5be(0x1bf)](_0x58a5be(0x1f4)),examplePrompts=document[_0x58a5be(0x1bf)](_0x58a5be(0x1ec)),form=document[_0x58a5be(0x1bf)]('chat-form');let isBusy=![];function _0x23ac(_0x56327e,_0x39a2b0){const _0x4de923=_0x4de9();return _0x23ac=function(_0x23ac10,_0x2f294a){_0x23ac10=_0x23ac10-0x1be;let _0x56a396=_0x4de923[_0x23ac10];return _0x56a396;},_0x23ac(_0x56327e,_0x39a2b0);}hamburger['addEventListener']('click',()=>{const _0xda34b0=_0x58a5be;sidebar[_0xda34b0(0x1ff)][_0xda34b0(0x1c1)](_0xda34b0(0x209)),hamburger[_0xda34b0(0x1ff)][_0xda34b0(0x1c1)](_0xda34b0(0x1e4));}),closeSidebar[_0x58a5be(0x1de)](_0x58a5be(0x203),()=>{const _0x4d33f9=_0x58a5be;sidebar[_0x4d33f9(0x1ff)][_0x4d33f9(0x1ee)](_0x4d33f9(0x209)),hamburger[_0x4d33f9(0x1ff)][_0x4d33f9(0x1e5)]('open');});function newChat(){const _0x2706ec=_0x58a5be;chatBox['innerHTML']='',examplePrompts[_0x2706ec(0x1f9)][_0x2706ec(0x1f2)]='block';}function downloadChat(){const _0x29cd73=_0x58a5be,_0x513b82=chatBox[_0x29cd73(0x1fa)],_0x34a6cd=new Blob([_0x513b82],{'type':_0x29cd73(0x1cb)}),_0x408355=URL[_0x29cd73(0x1e1)](_0x34a6cd),_0x593ca=document[_0x29cd73(0x1e3)]('a');_0x593ca['href']=_0x408355,_0x593ca['download']=_0x29cd73(0x201)+Date[_0x29cd73(0x1d1)]()+_0x29cd73(0x1c8),document[_0x29cd73(0x1d2)][_0x29cd73(0x1c9)](_0x593ca),_0x593ca['click'](),document[_0x29cd73(0x1d2)][_0x29cd73(0x204)](_0x593ca),URL['revokeObjectURL'](_0x408355);}async function typeEffect(_0x5adaa4,_0x26e839){const _0x4b0f49=_0x58a5be;_0x5adaa4[_0x4b0f49(0x1ff)][_0x4b0f49(0x1e5)](_0x4b0f49(0x1dd));let _0x36108e=0x0;while(_0x36108e<_0x26e839[_0x4b0f49(0x1fc)]){_0x5adaa4[_0x4b0f49(0x1cf)]+=_0x26e839[_0x4b0f49(0x1db)](_0x36108e),await new Promise(_0x1bd32c=>setTimeout(_0x1bd32c,0x19)),chatBox['scrollTop']=chatBox[_0x4b0f49(0x1e0)],_0x36108e++;}}function _0x4de9(){const _0x491585=['8sQwNzx','<strong>Zyro:</strong>\x20','30ylyLnX','You\x20are\x20Zyro\x20AI,\x20a\x20helpful\x20assistant\x20created\x20by\x20Zentrix,\x20using\x20emoji\x20with\x20response.','.txt','appendChild','156CUFKkf','text/plain','scrollTop','choices','innerHTML','textContent','mistralai/devstral-small:free','now','body','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22flex\x20justify-start\x20animate-fadeIn\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22max-w-xs\x20sm:max-w-sm\x20md:max-w-md\x20bg-blue-600\x20text-white\x20rounded-2xl\x20px-4\x20py-2\x20shadow-md\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22text-sm\x20break-words\x22>You:\x20','submit','value','close-sidebar','.prompt-card','POST','system','charAt','Zyro\x20AI','typing','addEventListener','preventDefault','scrollHeight','createObjectURL','sidebar','createElement','open','remove','forEach','https://openrouter.ai/api/v1/chat/completions','new-chat','user','stringify','test','example-prompts','API\x20call\x20failed:','add','Bearer\x20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','error','userAgent','display','div','user-input','focus','71905nWjrjI','message','querySelectorAll','style','innerText','4020reFyWl','length','14988SVxygh','new-chat-sidebar','classList','5030XdZDcv','zyro-chat-','download-chat-sidebar','click','removeChild','3139961iHzGSd','trim','disabled','60fXxiIX','-translate-x-full','content','application/json','2817WiJlye','getElementById','chatbox','toggle','1338932riNbts','2665404uRqAfj'];_0x4de9=function(){return _0x491585;};return _0x4de9();}async function handleSubmit(_0x3986e4){const _0x2250c7=_0x58a5be;_0x3986e4[_0x2250c7(0x1df)]();if(isBusy)return;const _0x3c5243=userInput[_0x2250c7(0x1d6)][_0x2250c7(0x206)]();if(!_0x3c5243)return;isBusy=!![],userInput[_0x2250c7(0x207)]=!![],chatBox[_0x2250c7(0x1ce)]+=_0x2250c7(0x1d4)+_0x3c5243+_0x2250c7(0x1d3),userInput[_0x2250c7(0x1d6)]='',examplePrompts[_0x2250c7(0x1f9)][_0x2250c7(0x1f2)]='none';const _0x21286a=document[_0x2250c7(0x1e3)](_0x2250c7(0x1f3));_0x21286a['className']='glass\x20p-4\x20rounded-xl\x20animate-fadeIn\x20typing\x20mb-2\x20bg-opacity-80',_0x21286a[_0x2250c7(0x1ce)]=_0x2250c7(0x1c5),chatBox[_0x2250c7(0x1c9)](_0x21286a),chatBox[_0x2250c7(0x1cc)]=chatBox[_0x2250c7(0x1e0)];try{const _0x507f4f=await fetch(_0x2250c7(0x1e7),{'method':_0x2250c7(0x1d9),'headers':{'Authorization':_0x2250c7(0x1ef),'X-Title':_0x2250c7(0x1dc),'Content-Type':_0x2250c7(0x20b)},'body':JSON[_0x2250c7(0x1ea)]({'model':_0x2250c7(0x1d0),'messages':[{'role':_0x2250c7(0x1da),'content':_0x2250c7(0x1c7)},{'role':_0x2250c7(0x1e9),'content':_0x3c5243}]})}),_0x4c883a=await _0x507f4f['json']();if(!_0x507f4f['ok']||!_0x4c883a[_0x2250c7(0x1cd)]||!_0x4c883a[_0x2250c7(0x1cd)][0x0])throw new Error(_0x4c883a[_0x2250c7(0x1f0)]?.['message']||'No\x20response\x20from\x20AI');const _0x508f7e=_0x4c883a['choices'][0x0]['message'][_0x2250c7(0x20a)];await typeEffect(_0x21286a,'\x20'+_0x508f7e);}catch(_0x29659c){_0x21286a[_0x2250c7(0x1ff)][_0x2250c7(0x1e5)]('typing'),_0x21286a['textContent']='Zyro:\x20Error\x20-\x20'+_0x29659c[_0x2250c7(0x1f7)],console['error'](_0x2250c7(0x1ed),_0x29659c);}isBusy=![],userInput[_0x2250c7(0x207)]=![],!/Mobi|Android/i[_0x2250c7(0x1eb)](navigator['userAgent'])&&userInput[_0x2250c7(0x1f5)]();}document[_0x58a5be(0x1f8)](_0x58a5be(0x1d8))[_0x58a5be(0x1e6)](_0x4a695b=>{const _0x1e8e88=_0x58a5be;_0x4a695b[_0x1e8e88(0x1de)](_0x1e8e88(0x203),()=>{const _0x1164cc=_0x1e8e88;if(isBusy)return;userInput[_0x1164cc(0x1d6)]=_0x4a695b[_0x1164cc(0x1cf)][_0x1164cc(0x206)](),!/Mobi|Android/i[_0x1164cc(0x1eb)](navigator[_0x1164cc(0x1f1)])&&userInput['focus']();});}),document[_0x58a5be(0x1bf)](_0x58a5be(0x1e8))[_0x58a5be(0x1de)](_0x58a5be(0x203),newChat),document[_0x58a5be(0x1bf)](_0x58a5be(0x1fe))[_0x58a5be(0x1de)](_0x58a5be(0x203),newChat),document[_0x58a5be(0x1bf)]('download-chat')[_0x58a5be(0x1de)]('click',downloadChat),document[_0x58a5be(0x1bf)](_0x58a5be(0x202))['addEventListener'](_0x58a5be(0x203),downloadChat),form[_0x58a5be(0x1de)](_0x58a5be(0x1d5),handleSubmit);</script>
+
+<script>
+  // Swipe to open/close sidebar
+  let touchStartX = 0, touchEndX = 0;
+  const swipeThreshold = 50;
+
+  document.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  document.addEventListener("touchmove", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+  });
+
+  document.addEventListener("touchend", () => {
+    const swipeDistance = touchEndX - touchStartX;
+
+    if (swipeDistance > swipeThreshold && sidebar.classList.contains("-translate-x-full")) {
+      sidebar.classList.remove("-translate-x-full");
+      hamburger.classList.add("open");
+    } else if (swipeDistance < -swipeThreshold && !sidebar.classList.contains("-translate-x-full")) {
+      sidebar.classList.add("-translate-x-full");
+      hamburger.classList.remove("open");
+    }
+
+    touchStartX = 0;
+    touchEndX = 0;
+  });
+</script>
+
+
+
+
+
+</body>
+</html>
